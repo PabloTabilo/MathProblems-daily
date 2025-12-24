@@ -1,0 +1,58 @@
+#include <iostream>
+#include <bits/stdc++.h>
+#include <chrono>
+
+using namespace std;
+using namespace chrono;
+
+/* -- Red black tree for build a set that can get kth position -- */
+/* -- not accept duplicates, its possible to implement? -- */
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template <typename T>
+using ordered_set = tree<
+    T,
+    null_type,
+    less<T>,
+    rb_tree_tag,
+    tree_order_statistics_node_update
+>;
+
+
+using ll = long long;
+using pii = pair<int,int>;
+
+void printDouble(double d){
+    // fix precision, the fixed is for evit rounding 
+    // rounding can be different for each compiler
+    cout << fixed << setprecision(11) << d << '\n';
+}
+
+int main(){
+    ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+    int t;
+    cin >> t;
+    while(t--){
+	ll a, b, k;
+	cin >> a >> b >> k;
+	ll g = gcd(a, b);
+	//cout << "START: g = " << g << ", a = " << a << ", b = " << b << endl;
+	while(g != 1){
+	    //cout << "on while new g = " << g << ", a = " << a << ", b = " << b << endl;
+	    a /= g;
+	    b /= g;
+	    g = gcd(a, b);
+	}
+	//cout << "FINAL a = " << a << ", b = " << b << endl;
+	if(a<=k && b<=k){
+	    cout << 1;
+	}else{
+	    cout << 2;
+	}
+	cout << '\n';
+    }
+
+    return 0;
+}
+
